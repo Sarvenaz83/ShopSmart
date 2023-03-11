@@ -10,9 +10,9 @@ using System.Windows.Forms;
 
 namespace ShopSmart
 {
-    public partial class FrmLogin : Form
+    public partial class FrmRegistration : Form
     {
-        public FrmLogin()
+        public FrmRegistration()
         {
             InitializeComponent();
         }
@@ -20,6 +20,13 @@ namespace ShopSmart
         private void pictureBox2_Click(object sender, EventArgs e)
         {
             Application.Exit();
+        }
+
+        private void lblHaveAnAccount_Click(object sender, EventArgs e)
+        {
+            FrmLogin login = new FrmLogin();
+            login.Show();
+            this.Hide();
         }
     }
 }
