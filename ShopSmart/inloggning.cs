@@ -1,4 +1,5 @@
-﻿using System;
+﻿using MySql.Data.MySqlClient;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -12,6 +13,10 @@ namespace ShopSmart
 {
     public partial class FrmLogin : Form
     {
+        ConnectionToDB connToDB = new ConnectionToDB();
+        
+
+        FrmMainPage mainPage = new FrmMainPage();
         public FrmLogin()
         {
             InitializeComponent();
@@ -49,6 +54,20 @@ namespace ShopSmart
             FrmRegistration registration = new FrmRegistration();
             registration.Show();
             this.Hide();
+        }
+
+        private void btnLogin_Click(object sender, EventArgs e)
+        {
+            ConnectionToDB connectionToDB = new ConnectionToDB();
+
+            string userName=txtBoxUsername.Text;
+            string password=txtBoxPassword.Text;
+            connectionToDB.inLogning(userName, password);
+        }
+
+        private void txtBoxUsername_TextChanged(object sender, EventArgs e)
+        {
+
         }
     }
 }

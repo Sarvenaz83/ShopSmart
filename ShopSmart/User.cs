@@ -14,9 +14,9 @@ namespace ShopSmart
         public string Password { get; set; }
         public string Email { get; set; }
         public string City { get; set; }
-        public string PostCode { get; set; }
+        public int PostCode { get; set; }
         public static List<User> users =  new List<User>();
-        public User(string firstName, string lastName, string userName, string password, string email, string city, string postCode)
+        public User(string firstName, string lastName, string userName, string password, string email, string city, int postCode)
         {
             FirstName = firstName;
             LastName = lastName;
