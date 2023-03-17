@@ -88,6 +88,7 @@
     <Compile Include="inloggning.Designer.cs">
       <DependentUpon>inloggning.cs</DependentUpon>
     </Compile>
+    <Compile Include="Login.cs" />
     <Compile Include="MainPage.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -150,6 +151,12 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\eye.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\profile.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\shoplist.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

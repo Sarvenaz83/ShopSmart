@@ -3,18 +3,26 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Data.Common;
 using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement.StartPanel;
 
 namespace ShopSmart
 {
     public partial class FrmLogin : Form
     {
         ConnectionToDB connToDB = new ConnectionToDB();
-        
+        MySqlCommand cmd = new MySqlCommand();
+        DataTable dataTable = new DataTable();
+        MySqlDataAdapter dataAdapter = new MySqlDataAdapter();
+        MySqlDataReader dataReader;
+        DataSet dataSet = new DataSet();
+        string sqlQuery;
+        MySqlConnection connection;
 
         FrmMainPage mainPage = new FrmMainPage();
         public FrmLogin()
@@ -58,16 +66,24 @@ namespace ShopSmart
 
         private void btnLogin_Click(object sender, EventArgs e)
         {
-            ConnectionToDB connectionToDB = new ConnectionToDB();
-
-            string userName=txtBoxUsername.Text;
-            string password=txtBoxPassword.Text;
-            connectionToDB.inLogning(userName, password);
-        }
-
-        private void txtBoxUsername_TextChanged(object sender, EventArgs e)
-        {
-
+            ConnectionToDB.serverInfo();
+            connToDB.connOpen();
+            MySqlCommand cmd = new MySqlCommand("sp_login", ConnectionToDB.conMaster);
+            cmd.CommandType = CommandType.StoredProcedure;
+            cmd.Parameters.Add("$userName", MySqlDbType.VarChar).Value = txtBoxUsername.Text;
+            cmd.Parameters.Add("$pass", MySqlDbType.VarChar).Value=txtBoxPassword.Text;
+            MySqlDataReader reader = cmd.ExecuteReader();
+            if (reader.Read())
+            {
+                connToDB.connOpen();
+                mainPage.Show();
+                this.Hide();
+            }
+            else
+            {
+                MessageBox.Show("Invalid Username Or Password, Try Again!", "ERROR", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            
         }
     }
 }
