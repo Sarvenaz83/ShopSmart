@@ -22,6 +22,9 @@ namespace ShopSmart
             Application.Exit();
         }
 
+        private void buttonProfile_MouseEnter(object sender, EventArgs e)
+        {
 
+        }
     }
 }
